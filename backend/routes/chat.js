@@ -36,18 +36,21 @@ router.get('/conversation/:otherUserId', mustBeLoggedIn, (req, res) => {
         const messages = getMessagesByConversation(conversationId);
         markMessagesAsRead(conversationId, userId);
 
+        const windowTitle = 'Viktor | ChatPage';
+        const pageTitle = 'Chat Page'
+
         res.render('chat-conversation', { 
             messages, 
             userId, 
             otherUserId,
             // You may need to fetch the other user's username for the view
             otherUsername: getAuthorUsername(otherUserId),
-
             // Pass the logged-in user's username
             loggedInUsername : getAuthorUsername(userId),
-
             //pass the logged-in user's id
-            loggedInUserId: userId
+            loggedInUserId: userId,
+            windowTitle,
+            pageTitle
             
         });
     } catch (error) {
@@ -70,8 +73,10 @@ router.post('/send-message/:otherUserId', mustBeLoggedIn, (req, res) => {
         const conversationId = getOrCreateConversation(userId, otherUserId);
         sendMessage(conversationId, userId, messageText);
         
+        const windowTitle = 'Viktor | Conversation';
+        const pageTitle = 'Chat Page'
         // Redirect back to the same conversation page
-        res.redirect(`/chat/conversation/${otherUserId}`);
+        res.redirect(`/chat/conversation/${otherUserId}`,{windowTitle, pageTitle});
     } catch (error) {
         console.error('Error sending message:', error);
         res.status(500).send('Error sending message.');
