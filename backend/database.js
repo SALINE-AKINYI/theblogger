@@ -1,6 +1,6 @@
 // database.js
 import Database from 'better-sqlite3';
-const db = new Database('myApp.db', { verbose: console.log });
+const db = new Database('myApp.db');
 
 db.pragma("journal_mode = WAL");
 const createTables = db.transaction(()=>{
