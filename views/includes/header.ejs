@@ -1,0 +1,71 @@
+<!-- includes/header.ejs -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <!-- Brand/Logo -->
+            <a class="navbar-brand fst-italic fw-bold" href="/">THE BLOGGER</a>
+            
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navbar Links and Search Form -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- User Search Form -->
+                <form class="d-flex me-lg-3 my-2 my-lg-0" action="/search/results" method="GET">
+                    <div class="input-group">
+                        <input class="form-control border-secondary text-white" type="search" placeholder="Search posts or users" aria-label="Search" name="q" required>
+                        <button class="btn btn-outline-secondary" type="submit" aria-label="Search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    
+                    <% if (user) { %>
+                        <!-- Conditional Notification Icon with badge -->
+                        <li class="nav-item position-relative">
+                            <a class="nav-link" href="/chat/inbox" aria-label="Inbox">
+                                <i class="bi bi-envelope"></i>
+                                <% if (locals.unreadCount > 0) { %>
+                                    <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
+                                        <%= locals.unreadCount %>
+                                    </span>
+                                <% } %>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-capitalize" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hello <%= user.username %>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                                <% if (user.isAdmin === 1) { %>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#adminLoginModal">Admin Panel</a></li>
+                                <% } %>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/post/create-post">Create Post</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
+                            </ul>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <!-- Use data attributes to trigger the modal -->
+                            <a class="nav-link btn btn-primary text-white me-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-primary text-white" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

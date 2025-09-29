@@ -1,0 +1,15 @@
+/* public/css/style.css */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1;
+}
+.chat-card {
+    border-color: #dee2e6 !important;
+}
+.message-container {
+    height: 100%;
+}

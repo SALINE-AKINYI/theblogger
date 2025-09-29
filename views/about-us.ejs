@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+    <%-include('includes/head') %>
+<body>
+    <!-- Navbar/Header with Login/Logout -->
+    <%-include('includes/header') %>
+    <main class="py-5">
+        <div class="container">
+            <section class="mb-5">
+                <h2 class="display-6 fw-bold text-primary mb-4">About Us</h2>
+                <p class="lead">Welcome to THE BLOGGER, a platform for passionate writers and curious minds.</p>
+                <p>We believe that great stories and valuable insights should be shared. THE BLOGGER was founded with the mission to create a vibrant online community where users can publish their unique perspectives, connect with fellow enthusiasts, and engage in meaningful conversations.</p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="display-6 fw-bold text-primary mb-4">Our Story</h2>
+                <p>Our journey began with a simple idea: to build a space where content creators could thrive. Frustrated by the noise and distractions of other platforms, we set out to create a clean, user-friendly environment that puts the focus back on quality content. From that initial spark, THE BLOGGER was born—a place for authentic voices to be heard, ideas to be exchanged, and stories to be celebrated.</p>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="display-6 fw-bold text-primary mb-4">What We Stand For</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="card-title fw-bold text-primary">Authenticity</h3>
+                                <p class="card-text">We champion real, unfiltered stories. Our community is built on genuine interactions and original content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="card-title fw-bold text-primary">Connection</h3>
+                                <p class="card-text">We're more than just a blog; we're a community. Our platform is designed to help you connect with others who share your passions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="card-title fw-bold text-primary">Clarity</h3>
+                                <p class="card-text">We value a simple, elegant user experience. Our clean design and intuitive interface ensure that reading and writing are always a pleasure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="card-title fw-bold text-primary">Empowerment</h3>
+                                <p class="card-text">We provide the tools for you to build your audience and make your voice heard. Every post, every comment, and every like contributes to a rich, supportive network.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="text-center">
+                <h2 class="display-6 fw-bold text-primary mb-4">Join Our Community</h2>
+                <p class="mb-4">Whether you're an experienced writer looking for a new home, a first-time blogger ready to share your story, or simply a reader with a thirst for knowledge, THE BLOGGER has a place for you. Explore our posts, leave a comment, and start your own journey.</p>
+                <a href="/post/create-post/" class="btn btn-primary btn-lg px-4">Ready to share your story? Join us today and become a part of our growing community.</a>
+            </section>
+        </div>
+    </main>
+
+    <%-include('includes/footer') %>
+
+    <%-include('includes/loginModal') %>
+    
+    <%-include('includes/registerModal') %>
+
+    <%-include('includes/adminModal') %>
+</body>
+</html>

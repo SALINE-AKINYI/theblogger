@@ -1,0 +1,59 @@
+<!-- includes/registerModal.ejs -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Create Your Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerFormAjax" action="/auth/register" method="POST"  novalidate>
+          <fieldset>
+            <!-- Area to display AJAX errors -->
+            <div id="registerErrorAlert" class="alert alert-danger d-none" role="alert"></div>
+
+            <!-- Hidden input for the referrer URL -->
+            <input type="hidden" id="registerRedirectUrl" name="redirectUrl" value="/">
+
+            <!-- Username Input with Floating Label -->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
+                <label for="username">Username</label>
+                <div class="invalid-feedback">Please provide a username.</div>
+            </div>
+            
+            <!-- Email Input with Floating Label -->
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
+                <label for="email">Email address</label>
+                <div class="invalid-feedback">Please provide a valid email address.</div>
+            </div>
+
+            <!-- Password Input with Floating Label -->
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <label for="password">Password</label>
+                <div class="invalid-feedback">Please provide a password.</div>
+            </div>
+
+            <!-- Confirm Password Input with Floating Label -->
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="invalid-feedback" id="confirmPasswordFeedback">Please confirm your password.</div>
+            </div>
+
+            <!-- Sign Up Button -->
+            <div class="d-grid gap-2 mb-3">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+
+            <!-- Login Link -->
+            <p class="text-center mb-0">Already have an account? <a href="#" class="text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a></p>
+            <p class="text-center mb-0">Are you Admin? <a href="#" data-bs-toggle="modal" data-bs-target="#adminLoginModal" class="text-decoration-none">Admin login</a></p>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

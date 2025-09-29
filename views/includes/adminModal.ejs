@@ -1,0 +1,44 @@
+<!-- includes/adminLoginModal.ejs -->
+<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="adminLoginFormAjax" action="/admin/login" method="POST"  novalidate>
+                    <!-- Area to display AJAX errors -->
+                    <div id="adminLoginErrorAlert" class="alert alert-danger d-none" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="admin-username" name="username" placeholder="Username" required autofocus>
+                        <label for="admin-username">Username</label>
+                        <div class="invalid-feedback">
+                            Please provide a username.
+                        </div>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="admin-password" name="password" placeholder="Password" required>
+                        <label for="admin-password">Password</label>
+                        <div class="invalid-feedback">
+                            Please provide a password.
+                        </div>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-primary btn-lg" type="submit">Log In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <p class="text-center text-muted mb-0">
+                    Not an admin? 
+                    <a href="#" class="text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registerModal">Sign up as User</a> or 
+                    <a href="#" class="text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Log in as User</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

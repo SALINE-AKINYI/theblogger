@@ -1,0 +1,98 @@
+<!-- views/chat-inbox.ejs -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<%- include('includes/head', {title: 'Inbox'}) %>
+<style>
+    /* Custom styles for professional inbox layout */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: var(--bs-body-bg);
+    }
+    main {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .inbox-card {
+        border-radius: 1.5rem;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+        border-bottom: 1px solid var(--bs-border-color-translucent);
+    }
+    .list-group-item {
+        transition: background-color 0.2s ease-in-out;
+        border-left: none;
+        border-right: none;
+    }
+    .list-group-item:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .list-group-item:last-child {
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+    .list-group-item:hover {
+        background-color: var(--bs-secondary-bg);
+    }
+    .conversation-details {
+        display: flex;
+        flex-direction: column;
+    }
+    .conversation-time {
+        white-space: nowrap;
+    }
+    .conversation-message {
+        color: var(--bs-gray-500);
+        font-size: 0.9rem;
+    }
+    .badge {
+        font-size: 0.75rem;
+    }
+</style>
+<body>
+    <%- include('includes/header') %>
+    <main>
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">  
+                        <div class="card-header bg-transparent border-0 rounded-top-4 py-4 px-4">
+                            <h1 class="card-title text-white mb-0">Your Conversations</h1>
+                        </div><hr>
+                        <div class="card-body p-0 card inbox-card bg-dark text-white">
+                            <% if (conversations.length > 0) { %>
+                                <div class="list-group list-group-flush rounded-bottom-4">
+                                    <% conversations.forEach(conversation => { %>
+                                        <a href="/chat/conversation/<%= conversation.otherUserId %>" class="list-group-item list-group-item-action py-3 px-4">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1 fw-bold text-capitalize"><%= conversation.otherUserUsername %></h5>
+                                                <small class="text-muted conversation-time"><%= new Date(conversation.lastMessageDate).toLocaleString() %></small>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-1">
+                                                <p class="mb-0 text-truncate me-auto conversation-message" style="max-width: 85%;"><%= conversation.lastMessage %></p>
+                                                <% if (conversation.unreadCount > 0) { %>
+                                                    <span class="badge bg-primary rounded-pill ms-3"><%= conversation.unreadCount %> new</span>
+                                                <% } %>
+                                            </div>
+                                        </a>
+                                    <% }); %>
+                                </div>
+                            <% } else { %>
+                                <div class="p-5 text-center text-muted">
+                                    <p class="lead mb-2">You have no conversations yet.</p>
+                                    <p class="mb-0">Start a new chat to see it appear here.</p>
+                                </div>
+                            <% } %>
+                        </div> 
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('includes/footer') %>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "myapp7",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": " nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ViktorTheProgrammer",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^11.10.0",
+    "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.8",
+    "cookie-parser": "~1.4.4",
+    "csurf": "^1.11.0",
+    "debug": "~2.6.9",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "errorhandler": "^1.5.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "http-errors": "~1.6.3",
+    "jade": "^0.29.0",
+    "jsonwebtoken": "^9.0.2",
+    "marked": "^16.1.1",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "sanitize-html": "^2.17.0",
+    "serve-favicon": "^2.5.1",
+    "session": "^0.1.0",
+    "vhost": "^3.0.2"
+  },
+  "type": "module"
+}

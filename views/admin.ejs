@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<%- include('includes/head') %>
+<body>
+    <%- include('includes/header') %>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h3 class="display-5 fw-bold">Admin Dashboard</h3>
+                <p class="lead">Welcome back, <span class="text-capitalize"><%= loggedInAdmin %></span>!</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Admins Card -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Administrators</h5>
+                    </div>
+                    <div class="card-body">
+                        <% if (allAdmins && allAdmins.length === 0) { %>
+                            <div class="alert alert-info text-center">No administrators found.</div>
+                        <% } else { %>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% allAdmins.forEach(admin => { %>
+                                            <tr>
+                                                <td><%= admin.id %></td>
+                                                <td><%= admin.username %></td>
+                                                <td><%= admin.email %></td>
+                                            </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regular Users Card -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="card-title mb-0">Regular Users</h5>
+                    </div>
+                    <div class="card-body">
+                        <% if (allUsers && allUsers.length === 0) { %>
+                            <div class="alert alert-info text-center">No regular users found.</div>
+                        <% } else { %>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% allUsers.forEach(user => { %>
+                                            <tr>
+                                                <td><%= user.id %></td>
+                                                <td><%= user.username %></td>
+                                                <td><%= user.email %></td>
+                                                <td>
+                                                    <form id="deleteUserForm-<%= user.id %>" action="/admin/delete/user/<%= user.id %>" method="POST" class="d-inline">
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteUser('<%= user.id %>', '<%= user.username %>')">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posts Card -->
+            <div class="col-12 mt-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-secondary text-whit">
+                        <h5 class="card-title mb-0">All Posts</h5>
+                    </div>
+                    <div class="card-body">
+                        <% if (allPosts && allPosts.length === 0) { %>
+                            <div class="alert alert-info text-center">No posts found.</div>
+                        <% } else { %>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% allPosts.forEach(post => { %>
+                                            <tr>
+                                                <td><%= post.postId %></td>
+                                                <td><a href="/post/post/<%= post.postId %>" class="text-decoration-none"><%= post.title %></a></td>
+                                                <td><%= post.authorName %></td>
+                                                <td>
+                                                    <form id="deletePostForm-<%= post.postId %>" action="/admin/delete/post/<%= post.postId %>" method="POST" class="d-inline">
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeletePost('<%= post.postId %>', '<%= post.title %>')">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <%- include("includes/footer") %>
+</body>
+</html>

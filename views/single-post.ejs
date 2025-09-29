@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<%- include('includes/head') %>
+<body>
+    <%- include('includes/header') %>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="container shadow-lg mb-4">
+                    <div class="card-body">
+                        <h1 class="card-title"><%= post.title %></h1>
+                        <p class="card-subtitle mb-2 text-muted">by <a href="/search/profile/<%= post.author %>"><%= post.author %></a></p>
+                        <hr>
+                        <p class="card-text" style="white-space: pre-line;"><%= post.body %></p>
+
+                        <hr>
+                        <div class="d-flex align-items-center mt-4">
+
+                            <a href="#comments-section" class="text-decoration-none me-3">
+                                    <i class="bi bi-chat-dots-fill"><%= post.commentsCount %></i>
+                            </a>
+
+                            <% if (user) { %>
+                                <span class="like-btn" data-post-id="<%= post.id %>" role="button" tabindex="0">
+                                    <span class="like-icon-container <%= post.hasLiked ? 'btn-danger' : 'text-danger-emphasis' %>">
+                                        <i class="bi <%= post.hasLiked ? 'bi-heart-fill' : 'bi-heart' %>"></i>
+                                        <span class="likes-count"><%= post.likesCount %></span>
+                                    </span>
+                                </span>
+
+                            <% } else { %>
+                                <span class="like-btn text-danger-emphasis">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="likes-count"><%= post.likesCount %></span>
+                                </span>
+                            <% } %>
+
+                            <button class="btn btn-outline-info btn-sm ms-2 " type="button" data-bs-toggle="modal" data-bs-target="#likesModal">
+                                <i class="bi bi-eye"></i>View Likers
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section" id="comments-section">
+                    <h4 class="mb-3">Comments (<span id="comment-count"><%= post.comments.length %></span>)</h4>
+                    
+                    <!-- Existing Comments -->
+                    <div id="comments-list"><hr>
+                        <% post.comments.forEach(comment => { %>
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="card-text mb-1" style="white-space: pre-line;"><%= comment.comment %></p><hr>
+                                    <div class="text-end">
+                                        <small class="text-muted">by <%= comment.author %> on <%= new Date(comment.createdDate).toLocaleDateString() %></small>
+                                        <small class="text-muted"><%= new Date(comment.createdDate).toLocaleString("en-US", { timeZoneName: "short", hour: "2-digit", minute: "2-digit" }) %></small>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div><hr>
+
+                    <!-- Comment Form -->
+                    <%- include('includes/comment-form', { postId: post.id, user: user }) %>
+                </div>
+
+                <!-- End of Comments Section -->
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Likes Modal -->
+
+    <div class="modal fade" id="likesModal" tabindex="-1" aria-labelledby="likesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="likesModalLabel">Users who liked this post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <% if (post.likedUsers && post.likedUsers.length > 0) { %>
+                        <ul class="list-group">
+                            <% post.likedUsers.forEach(username => { %>
+                                <li class="list-group-item"><%= username %></li>
+                            <% }); %>
+                        </ul>
+                    <% } else { %>
+                        <p>No one has liked this post yet.</p>
+                    <% } %>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- end of like modal-->
+
+    <%- include('includes/footer') %>
+
+    <%-include('includes/loginModal')  %>
+
+    <%-include('includes/registerModal')  %>
+
+ 
+</body>
+</html>

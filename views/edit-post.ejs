@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<%- include('includes/head') %>
+<body>
+    <%- include('includes/header') %>
+    <main class="container my-5 flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%;">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Edit Your Post</h3>
+                <form id="edit-form" action="/post/edit-post/<%= post.id %>" method="POST" class="needs-validation" novalidate>
+                    
+                    <!-- Displaying server-side errors using Bootstrap alert -->
+                    <% if (errors && errors.length > 0) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <ul class="mb-0">
+                        <% errors.forEach((error) => { %>
+                            <li><%= error %></li>
+                        <% }); %>
+                        </ul>
+                    </div>
+                    <% } %>
+
+                    <fieldset>
+                        <legend class="d-none">Edit existing post</legend>
+                        
+                        <!-- Title Input with Floating Label -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="title" name="title" value="<%= post.title %>" autocomplete="off" placeholder="Title" required>
+                            <label for="title">Title</label>
+                            <div class="invalid-feedback">
+                                Please provide a title for your post.
+                            </div>
+                        </div>
+
+                        <!-- Content Textarea with Floating Label -->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="body" name="body" rows="8" placeholder="Content" style="height: 200px; white-space: pre-line;" required><%= post.body %></textarea>
+                            <label for="body">Content</label>
+                            <div class="invalid-feedback">
+                                Please provide some content for your post.
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include('includes/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<% if (user) { %>
+    <!-- Display form if user is logged in -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Leave a Comment</h5>
+            <form action="/post/post/<%= postId %>/comment" method="POST">
+                <div class="mb-3">
+                    <textarea class="form-control" name="comment" rows="3" placeholder="Write your comment..." required></textarea>
+                </div>
+                <input type="hidden" name="authorId" value="<%= user.id %>">
+                <button type="submit" class="btn btn-primary">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+<% } else { %>
+    <!-- Display login prompt if no user is logged in -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="mb-0">Please <a href="/auth/login">log in</a> to leave a comment.</p>
+        </div>
+    </div>
+<% } %>

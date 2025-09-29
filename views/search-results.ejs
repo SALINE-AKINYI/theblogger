@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<%- include('includes/head') %>
+<body class="d-flex flex-column min-vh-100">
+    <%- include('includes/header') %>
+
+    <main class="container py-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="mb-4">Search Results for "<%= query %>"</h2>
+                
+                <% if (message) { %>
+                    <div class="alert alert-info text-center" role="alert">
+                        <%= message %>
+                    </div>
+                <% } else { %>
+                    <!-- Posts Section -->
+                    <% if (posts.length > 0) { %>
+                        <h4 class="mt-4">Posts</h4>
+                        <hr>
+                        <div class="row row-cols-1 g-4 mb-4">
+                            <% posts.forEach(post => { %>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="/post/post/<%= post.id %>" class="text-decoration-none"><%= post.title %></a></h5>
+                                    <p class="card-text text-muted">by <a href="/search/profile/<%= post.author %>" class="text-decoration-none"><%= post.author %></a></p>
+
+                                    <!-- Read More Section -->
+                                    <p class="card-text">
+                                        <% if (post.body.length > 150) { %>
+                                            <!-- Show a short excerpt with "..." -->
+                                            <span id="short-text-<%= post.id %>"><%= post.body.substring(0, 150) %>...</span>
+                                            
+                                            <!-- Hidden full text -->
+                                            <span id="full-text-<%= post.id %>" class="d-none" style="white-space: pre-line;"><%= post.body %></span>
+                                            
+                                            <!-- The toggle button -->
+                                            <button class="btn btn-link p-0 read-more-btn" data-post-id="<%= post.id %>">Read more</button>
+                                        <% } else { %>
+                                            <!-- If the post is short, show the whole thing -->
+                                            <%= post.body %>
+                                        <% } %>
+                                    </p>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <small class="text-muted">
+                                            <i class="bi bi-calendar"></i> <%= new Date(post.createdDate).toLocaleDateString() %>
+                                        </small>
+                                        <div>
+                                            <span class="me-3"><i class="bi bi-heart-fill text-danger"></i> <%= post.likesCount %></span>
+                                            <span><i class="bi bi-chat-dots-fill text-info"></i> <%= post.commentsCount %></span>
+                                        </div>
+                                    </div>
+                                </div><hr>
+                            <% }); %>
+                        </div>
+                    <% } %>
+
+                    <!-- Users Section -->
+                    <% if (users.length > 0) { %>
+                        <h4 class="mt-4">Users</h4>
+                        <hr>
+                        <div class="list-group">
+                            <% users.forEach(user => { %>
+                                <a href="/search/profile/<%= user.username %>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <%= user.username %>
+                                    <small class="text-muted">View Profile</small>
+                                </a>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <%- include('includes/footer') %>
+
+    <%-include('includes/loginModal')  %>
+
+    <%-include('includes/registerModal')  %>
+
+</body>
+</html>

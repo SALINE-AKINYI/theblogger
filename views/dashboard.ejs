@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<%-include('includes/head') %>
+<body class="d-flex flex-column min-vh-100">
+    
+    <!-- Header with user links -->
+    <%-include('includes/header') %>
+
+    <!-- Main Content Area -->
+    <main class="container py-5 flex-grow-1">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">Welcome, <span class="text-capitalize"><%= user %></span>!</h4>
+            <a href="/post/create-post" class="btn btn-primary">Create new post</a>
+        </div>
+
+        <hr>
+        
+        <% if(posts.length === 0){%>
+            <div class="text-center py-5">
+                <h3 class="text-muted">Oops! You don't have any posts yet.</h3>
+                <p class="lead">Start by creating your first post.</p>
+            </div>
+        <% } else { %>
+            <h3 class="mb-4">Here are your posts.</h3>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% posts.forEach(post => { %>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">
+                                    <a href="/post/post/<%= post.id %>" class="text-decoration-none"><%= post.title %></a>
+                                </h5>
+                                <p class="card-text text-muted">
+                                    <small>
+                                        Posted on 
+                                        <% const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
+                                        <strong><%= days[new Date(post.createdDate).getDay()] %></strong>,
+                                        <%= new Date(post.createdDate).toLocaleString() %>
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-center align-items-center bg-secondary">
+                                <div>
+                                    <a href="/post/edit-post/<%= post.id %>" class="btn btn-sm btn-outline-info me-2">Edit</a>
+                                    <form id="deletePostForm-<%= post.id %>" action="/post/delete-post/<%= post.id %>" method="POST" class="d-inline-block">
+                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmDeletePost('<%= post.id %>', '<%= post.title %>')">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </main>
+    
+    <!-- Footer -->
+    <%-include('includes/footer') %>
+
+ 
+</body>
+</html>
